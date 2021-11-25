@@ -1,4 +1,8 @@
-require('dotenv').config();
+const { join } = require('path');
+
+require('dotenv').config({
+  path: join(__dirname, '..', '.env'),
+});
 
 const express = require('express');
 const cors = require('cors');
@@ -12,7 +16,6 @@ const {
 mongoose.connect(MONGODB_CONNECTION_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
-  useFindAndModify: false
 });
 
 const app = express();
