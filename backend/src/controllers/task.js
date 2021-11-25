@@ -29,7 +29,7 @@ const RULES = {
 //#region 
 async function listTasks(_, response) {
   try {
-    const tasks = await Task.find({});
+    const tasks = await Task.find({}).sort({ due_date: 1 });
     return response.json(tasks);
   }
   catch (e) {
