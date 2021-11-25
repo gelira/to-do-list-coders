@@ -29,7 +29,11 @@ const RULES = {
 //#region 
 async function listTasks(_, response) {
   try {
-    const tasks = await Task.find({}).sort({ due_date: 1 });
+    const tasksDueDate = await Task.find({ due_date: { $ne: null } }).sort({ due_date: 1 });
+    const tasksRemain = await Task.find({ due_date: null });
+
+    const tasks = [...tasksDueDate, ...tasksRemain];
+
     return response.json(tasks);
   }
   catch (e) {
