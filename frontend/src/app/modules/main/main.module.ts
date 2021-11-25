@@ -6,20 +6,24 @@ import { MatButtonModule } from '@angular/material/button';
 
 import { HomeComponent } from './pages/home/home.component';
 import { HeaderComponent } from './components/header/header.component';
+import { TaskService } from './services/task.service';
 
 @NgModule({
   declarations: [
     HomeComponent,
-    HeaderComponent
+    HeaderComponent,
   ],
   imports: [
     CommonModule,
     MatToolbarModule,
     MatIconModule,
-    MatButtonModule
+    MatButtonModule,
   ],
   exports: [
-    HomeComponent
+    HomeComponent,
+  ],
+  providers: [
+    TaskService,
   ]
 })
 export class MainModule { }
