@@ -4,8 +4,8 @@ const yup = require('yup');
 const { validateBody } = require('../middlewares');
 const { Task } = require('../models');
 const { 
-  LISTA_PRIORIDADES,
-  PRIORIDADES,
+  LIST_PRIORITIES,
+  PRIORITIES,
 } = require('../utils/consts');
 
 const RULES = {
@@ -13,14 +13,14 @@ const RULES = {
     title: yup.string().required().trim().max(50),
     description: yup.string().notRequired().trim().max(200), 
     due_date: yup.date().notRequired(),
-    priority: yup.string().required().oneOf(LISTA_PRIORIDADES),
+    priority: yup.string().required().oneOf(LIST_PRIORITIES),
     done: yup.boolean().required(),
   }),
   UPDATE: yup.object({
     title: yup.string().notRequired().trim().max(50),
     description: yup.string().notRequired().trim().max(200), 
     due_date: yup.date().notRequired(),
-    priority: yup.string().notRequired().oneOf(LISTA_PRIORIDADES),
+    priority: yup.string().notRequired().oneOf(LIST_PRIORITIES),
     done: yup.boolean().notRequired(),
   }),
 };
