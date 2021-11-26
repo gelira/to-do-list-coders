@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Task, taskDefault } from 'src/app/models/task.model';
@@ -9,8 +9,9 @@ import { TaskService } from '../../services/task.service';
   templateUrl: './update-task.component.html',
   styleUrls: ['./update-task.component.css']
 })
-export class UpdateTaskComponent implements OnInit {
+export class UpdateTaskComponent implements OnInit, OnDestroy {
   task: Task = taskDefault;
+  sub?: Subscription;
 
   constructor(
     private taskService: TaskService,
@@ -18,11 +19,6 @@ export class UpdateTaskComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    const sub: Subscription = this.taskService.task$.subscribe({
-      next: data => this.task = data,
-      complete: () => sub.unsubscribe()
-    });
-
     const subRoute: Subscription = this.route.params.subscribe({
       next: data => {
         const id = data['id'] as string;
@@ -30,6 +26,12 @@ export class UpdateTaskComponent implements OnInit {
       },
       complete: () => subRoute.unsubscribe(),
     });
+
+    this.sub = this.taskService.task$.subscribe(data => this.task = data);
+  }
+
+  ngOnDestroy(): void {
+    this.sub?.unsubscribe();
   }
 
 }
