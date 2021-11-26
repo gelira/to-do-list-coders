@@ -30,3 +30,14 @@ export interface TaskUpdate {
   priority?: Priority;
   done?: boolean;
 }
+
+export const taskDefault: Task = {
+  _id: '',
+  created_at: '',
+  description: '',
+  done: false,
+  due_date: null,
+  priority: Priority.LOW,
+  title: '',
+  updated_at: '',
+};
