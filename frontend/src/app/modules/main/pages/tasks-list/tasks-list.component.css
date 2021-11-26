@@ -1,0 +1,8 @@
+.tasks-list-container {
+  max-width: 80%;
+  margin: auto;
+}
+
+.tasks-list-item {
+  margin-top: 20px;
+}

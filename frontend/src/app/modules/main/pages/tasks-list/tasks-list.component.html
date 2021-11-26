@@ -1,6 +1,5 @@
-<ul>
-  <li *ngFor="let task of tasks">
-    <p>{{ task.title }}</p>
-    <p>{{ task.done }}</p>
-  </li>
-</ul>
+<div class="tasks-list-container">
+  <div *ngFor="let task of tasks" class="tasks-list-item">
+    <main-task-abstract [task]="task"></main-task-abstract>
+  </div>
+</div>
