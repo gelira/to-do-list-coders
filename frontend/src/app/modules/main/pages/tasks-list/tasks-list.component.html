@@ -1,5 +1,3 @@
-<div class="tasks-list-container">
-  <div *ngFor="let task of tasks$ | async" class="tasks-list-item">
-    <main-task-abstract [task]="task"></main-task-abstract>
-  </div>
+<div *ngFor="let task of tasks$ | async" class="tasks-list-item">
+  <main-task-abstract [task]="task"></main-task-abstract>
 </div>
