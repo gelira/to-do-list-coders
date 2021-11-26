@@ -5,7 +5,7 @@
     <mat-chip-list>
       <mat-chip [class]="chipClass()">{{ chipText() }}</mat-chip>
     </mat-chip-list>
-    <button mat-icon-button>
+    <button mat-icon-button [matMenuTriggerFor]="menu">
       <mat-icon>more_vert</mat-icon>
     </button>
   </mat-toolbar>
@@ -14,3 +14,7 @@
     <h3>Descrição: {{ task?.description }}</h3>
   </mat-card-content>
 </mat-card>
+
+<mat-menu #menu="matMenu">
+  <button mat-menu-item (click)="changeStatusTask()">{{ buttonLabelStatusTask() }}</button>
+</mat-menu>

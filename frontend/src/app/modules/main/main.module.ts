@@ -5,6 +5,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
+import { MatMenuModule } from '@angular/material/menu';
 
 import { HomeComponent } from './pages/home/home.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -26,6 +27,7 @@ import { TaskAbstractComponent } from './components/task-abstract/task-abstract.
     MatButtonModule,
     MatCardModule,
     MatChipsModule,
+    MatMenuModule,
   ],
   exports: [
     HomeComponent,

@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Task } from 'src/app/models/task.model';
+import { TaskService } from '../../services/task.service';
 
 @Component({
   selector: 'main-task-abstract',
@@ -9,7 +10,7 @@ import { Task } from 'src/app/models/task.model';
 export class TaskAbstractComponent implements OnInit {
   @Input() task?: Task;
 
-  constructor() { }
+  constructor(private taskService: TaskService) { }
 
   ngOnInit(): void {
   }
@@ -35,5 +36,18 @@ export class TaskAbstractComponent implements OnInit {
 
   chipText() {
     return this.task?.done ? 'Concluída' : 'Pendente';
+  }
+
+  buttonLabelStatusTask() {
+    return this.task?.done ? 'Tarefa Pendente' : 'Tarefa Concluída';
+  }
+
+  changeStatusTask() {
+    console.log(this.task?._id);
+    const obs = this.taskService.updateTask(this.task?._id as string, { done: !this.task?.done });
+    const sub = obs.subscribe(data => {
+      this.task = data;
+      sub.unsubscribe();
+    });
   }
 }
