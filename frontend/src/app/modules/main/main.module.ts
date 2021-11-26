@@ -7,11 +7,13 @@ import { MatButtonModule } from '@angular/material/button';
 import { HomeComponent } from './pages/home/home.component';
 import { HeaderComponent } from './components/header/header.component';
 import { TaskService } from './services/task.service';
+import { TasksListComponent } from './pages/tasks-list/tasks-list.component';
 
 @NgModule({
   declarations: [
     HomeComponent,
     HeaderComponent,
+    TasksListComponent,
   ],
   imports: [
     CommonModule,
