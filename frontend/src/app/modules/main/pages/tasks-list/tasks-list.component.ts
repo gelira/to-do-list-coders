@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 
 import { Task } from 'src/app/models/task.model';
 import { TaskService } from '../../services/task.service';
@@ -9,15 +10,13 @@ import { TaskService } from '../../services/task.service';
   styleUrls: ['./tasks-list.component.css']
 })
 export class TasksListComponent implements OnInit {
-  tasks: Task[] = [];
+  tasks$: Observable<Task[]>;
 
-  constructor(private taskService: TaskService) { }
+  constructor(private taskService: TaskService) {
+    this.tasks$ = this.taskService.tasks$;
+  }
 
   ngOnInit(): void {
-    const obs = this.taskService.listTasks();
-    const sub = obs.subscribe(data => {
-      this.tasks = data;
-      sub.unsubscribe();
-    });
+    this.taskService.listTasks();
   }
 }

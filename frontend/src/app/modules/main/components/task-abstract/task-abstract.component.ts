@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Task } from 'src/app/models/task.model';
+import { Subscription } from 'rxjs';
+
+import { Task, taskDefault } from 'src/app/models/task.model';
 import { TaskService } from '../../services/task.service';
 
 @Component({
@@ -8,7 +10,7 @@ import { TaskService } from '../../services/task.service';
   styleUrls: ['./task-abstract.component.css']
 })
 export class TaskAbstractComponent implements OnInit {
-  @Input() task?: Task;
+  @Input() task: Task = taskDefault;
 
   constructor(private taskService: TaskService) { }
 
@@ -18,7 +20,7 @@ export class TaskAbstractComponent implements OnInit {
   dueDateFormat() {
     const prefix = 'Data limite de entrega: ';
 
-    if (!this.task?.due_date) {
+    if (!this.task.due_date) {
       return prefix + 'Sem data';
     }
 
@@ -31,23 +33,22 @@ export class TaskAbstractComponent implements OnInit {
   }
 
   chipClass() {
-    return this.task?.done ? 'task-done-chip' : 'task-pending-chip';
+    return this.task.done ? 'task-done-chip' : 'task-pending-chip';
   }
 
   chipText() {
-    return this.task?.done ? 'Concluída' : 'Pendente';
+    return this.task.done ? 'Concluída' : 'Pendente';
   }
 
   buttonLabelStatusTask() {
-    return this.task?.done ? 'Tarefa Pendente' : 'Tarefa Concluída';
+    return this.task.done ? 'Tarefa Pendente' : 'Tarefa Concluída';
   }
 
   changeStatusTask() {
-    console.log(this.task?._id);
-    const obs = this.taskService.updateTask(this.task?._id as string, { done: !this.task?.done });
-    const sub = obs.subscribe(data => {
-      this.task = data;
-      sub.unsubscribe();
+    const obs = this.taskService.updateTask(this.task._id, { done: !this.task.done });
+    const sub: Subscription = obs.subscribe({
+      next: () => { },
+      complete: () => sub.unsubscribe()
     });
   }
 }
