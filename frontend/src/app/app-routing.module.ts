@@ -12,7 +12,7 @@ const routes: Routes = [
     component: HomeComponent,
     children: [
       {
-        path: 'uptade-task/:id',
+        path: 'update-task/:id',
         component: UpdateTaskComponent
       },
       {
