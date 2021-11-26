@@ -1,3 +1,6 @@
 <h2>Atualização de tarefa</h2>
 
-<main-form-task [task]="task"></main-form-task>
+<main-form-task
+  [task]="task"
+  (taskData)="onSubmit($event)"
+></main-form-task>

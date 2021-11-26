@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Task, taskDefault } from 'src/app/models/task.model';
 import { TaskService } from '../../services/task.service';
@@ -15,7 +15,8 @@ export class UpdateTaskComponent implements OnInit, OnDestroy {
 
   constructor(
     private taskService: TaskService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -34,4 +35,19 @@ export class UpdateTaskComponent implements OnInit, OnDestroy {
     this.sub?.unsubscribe();
   }
 
+  onSubmit(data: any) {
+    let {
+      title,
+      description,
+      done,
+      due_date,
+      priority
+    } = data;
+
+    const sub = this.taskService.updateTask(this.task._id, { description, done, priority, title, due_date })
+      .subscribe(() => {
+        this.router.navigate(['/tasks-list']);
+        sub.unsubscribe();
+      });
+  }
 }
