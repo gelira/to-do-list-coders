@@ -51,4 +51,8 @@ export class TaskAbstractComponent implements OnInit {
       complete: () => sub.unsubscribe()
     });
   }
+
+  deleteTask() {
+    this.taskService.deleteTask(this.task._id);
+  }
 }
