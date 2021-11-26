@@ -17,5 +17,6 @@
 
 <mat-menu #menu="matMenu">
   <button mat-menu-item (click)="changeStatusTask()">{{ buttonLabelStatusTask() }}</button>
+  <button mat-menu-item [routerLink]="['/update-task', task._id]">Atualizar tarefa</button>
   <button mat-menu-item (click)="deleteTask()">Excluir tarefa</button>
 </mat-menu>
