@@ -13,6 +13,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatInputModule } from '@angular/material/input';
 import { MatNativeDateModule } from '@angular/material/core';
 import { ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 import { HomeComponent } from './pages/home/home.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -20,6 +21,8 @@ import { TaskService } from './services/task.service';
 import { TasksListComponent } from './pages/tasks-list/tasks-list.component';
 import { TaskAbstractComponent } from './components/task-abstract/task-abstract.component';
 import { FormTaskComponent } from './components/form-task/form-task.component';
+import { CreateTaskComponent } from './pages/create-task/create-task.component';
+import { UpdateTaskComponent } from './pages/update-task/update-task.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +31,8 @@ import { FormTaskComponent } from './components/form-task/form-task.component';
     TasksListComponent,
     TaskAbstractComponent,
     FormTaskComponent,
+    CreateTaskComponent,
+    UpdateTaskComponent,
   ],
   imports: [
     CommonModule,
@@ -44,9 +49,12 @@ import { FormTaskComponent } from './components/form-task/form-task.component';
     MatNativeDateModule,
     MatInputModule,
     ReactiveFormsModule,
+    RouterModule,
   ],
   exports: [
     HomeComponent,
+    CreateTaskComponent,
+    UpdateTaskComponent
   ],
   providers: [
     TaskService,
