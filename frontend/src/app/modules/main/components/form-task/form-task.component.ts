@@ -1,7 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Task, Priority, taskDefault } from 'src/app/models/task.model';
-import { TaskService } from '../../services/task.service';
 
 @Component({
   selector: 'main-form-task',
@@ -10,6 +9,7 @@ import { TaskService } from '../../services/task.service';
 })
 export class FormTaskComponent implements OnInit {
   @Input() task: Task = taskDefault;
+  @Output() taskData = new EventEmitter();
 
   form = this.fb.group({
     title: [''],
@@ -34,10 +34,7 @@ export class FormTaskComponent implements OnInit {
     }
   ];
 
-  constructor(
-    private taskService: TaskService,
-    private fb: FormBuilder
-  ) { }
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
     if (!this.task._id) {
@@ -63,6 +60,14 @@ export class FormTaskComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.form.value);
+    let { title, description, due_date, priority, done } = this.form.value;
+
+    const id = this.task._id;
+
+    if (due_date) {
+      due_date = typeof due_date === 'string' ? due_date : (due_date as Date).toISOString();
+    }
+
+    this.taskData.emit({ id, title, description, priority, done, due_date });
   }
 }
