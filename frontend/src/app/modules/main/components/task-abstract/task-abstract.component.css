@@ -2,3 +2,12 @@
   background-color: green;
   color: white;
 }
+
+.task-pending-chip {
+  background-color: red;
+  color: white;
+}
+
+.task-card-toolbar {
+  background-color: white;
+}

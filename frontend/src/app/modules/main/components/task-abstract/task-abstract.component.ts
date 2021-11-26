@@ -15,8 +15,10 @@ export class TaskAbstractComponent implements OnInit {
   }
 
   dueDateFormat() {
+    const prefix = 'Data limite de entrega: ';
+
     if (!this.task?.due_date) {
-      return 'Sem data';
+      return prefix + 'Sem data';
     }
 
     const dt = new Date(this.task.due_date);
@@ -24,6 +26,14 @@ export class TaskAbstractComponent implements OnInit {
     const month = (dt.getMonth() + 1).toString().padStart(2, '0');
     const year = dt.getFullYear().toString();
 
-    return `Data limite de entrega: ${day}/${month}/${year}`;
+    return prefix + `${day}/${month}/${year}`;
+  }
+
+  chipClass() {
+    return this.task?.done ? 'task-done-chip' : 'task-pending-chip';
+  }
+
+  chipText() {
+    return this.task?.done ? 'Concluída' : 'Pendente';
   }
 }

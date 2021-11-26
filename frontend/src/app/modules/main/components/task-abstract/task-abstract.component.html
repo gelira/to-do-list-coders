@@ -1,9 +1,16 @@
 <mat-card>
-  <mat-card-title>{{ task?.title }}</mat-card-title>
-  <mat-card-content>
-    <mat-chip-list *ngIf="task?.done">
-      <mat-chip class="task-done-chip">Concluída</mat-chip>
+  <mat-toolbar class="task-card-toolbar">
+    <span>{{ task?.title }}</span>
+    <span class="spacer"></span>
+    <mat-chip-list>
+      <mat-chip [class]="chipClass()">{{ chipText() }}</mat-chip>
     </mat-chip-list>
-    <p>{{ dueDateFormat() }}</p>
+    <button mat-icon-button>
+      <mat-icon>more_vert</mat-icon>
+    </button>
+  </mat-toolbar>
+  <mat-card-content>
+    <h3>{{ dueDateFormat() }}</h3>
+    <h3>Descrição: {{ task?.description }}</h3>
   </mat-card-content>
 </mat-card>
