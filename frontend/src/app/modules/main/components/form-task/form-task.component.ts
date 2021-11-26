@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Task, Priority, taskDefault } from 'src/app/models/task.model';
 
@@ -7,7 +7,7 @@ import { Task, Priority, taskDefault } from 'src/app/models/task.model';
   templateUrl: './form-task.component.html',
   styleUrls: ['./form-task.component.css']
 })
-export class FormTaskComponent implements OnInit {
+export class FormTaskComponent implements OnInit, OnChanges {
   @Input() task: Task = taskDefault;
   @Output() taskData = new EventEmitter();
 
@@ -36,8 +36,10 @@ export class FormTaskComponent implements OnInit {
 
   constructor(private fb: FormBuilder) { }
 
-  ngOnInit(): void {
-    if (!this.task._id) {
+  ngOnChanges(changes: SimpleChanges): void {
+    const task = changes['task'].currentValue;
+
+    if (!task._id) {
       return;
     }
 
@@ -47,7 +49,7 @@ export class FormTaskComponent implements OnInit {
       due_date,
       priority,
       done
-    } = this.task;
+    } = task;
 
     if (due_date) {
       const dt = new Date(due_date);
@@ -57,6 +59,9 @@ export class FormTaskComponent implements OnInit {
     }
 
     this.form.setValue({ title, description, due_date, priority, done });
+  }
+
+  ngOnInit(): void {
   }
 
   onSubmit() {
