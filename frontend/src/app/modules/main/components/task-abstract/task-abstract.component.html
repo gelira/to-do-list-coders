@@ -1,0 +1,22 @@
+<mat-card>
+  <mat-toolbar class="task-card-toolbar">
+    <span>{{ task?.title }}</span>
+    <span class="spacer"></span>
+    <mat-chip-list>
+      <mat-chip [class]="chipClass()">{{ chipText() }}</mat-chip>
+    </mat-chip-list>
+    <button mat-icon-button [matMenuTriggerFor]="menu">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+  </mat-toolbar>
+  <mat-card-content>
+    <h3>{{ dueDateFormat() }}</h3>
+    <h3>Descrição: {{ task?.description }}</h3>
+  </mat-card-content>
+</mat-card>
+
+<mat-menu #menu="matMenu">
+  <button mat-menu-item (click)="changeStatusTask()">{{ buttonLabelStatusTask() }}</button>
+  <button mat-menu-item [routerLink]="['/update-task', task._id]">Atualizar tarefa</button>
+  <button mat-menu-item (click)="deleteTask()">Excluir tarefa</button>
+</mat-menu>
